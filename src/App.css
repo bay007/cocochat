@@ -1,18 +1,18 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
 
-html, body {
+/*html, body {
     background: #e5e5e5;
     font-family: 'Lato', sans-serif;
     margin: 0px auto;
-}
-::selection{
+}*/
+/*::selection{
   background: rgba(82,179,217,0.3);
   color: inherit;
 }
 a{
   color: rgba(82,179,217,0.9);
-}
+}*/
 
 /* M E N U */
 
@@ -88,6 +88,8 @@ a{
     margin: 0;
     padding: 0 0 50px 0;
     margin-top: 60px;
+    overflow-y: scroll;
+    position: absolute;
     margin-bottom: 40px;
 }
 .chat li {
@@ -301,19 +303,18 @@ span.funny{background-image: url(http://i.imgur.com/qKia58V.png);}
 
 /* T Y P E */
 
-textarea.textarea {
+.textarea {
     position: fixed;
     bottom: 0px;
     left: 0px;
     right: 0px;
-    width: 98%;
-    height: 55px;
+    /*width: 98%;
+    height: 55px;*/
     z-index: 99;
-    background: #fafafa;
+    background: rgba(181, 181, 191, 0.57);
     border: none;
     outline: none;
     padding: 10px;
-    
     color: #666;
     font-weight: 400;
 }

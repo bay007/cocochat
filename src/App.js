@@ -65,7 +65,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <DevTools />
+        
         <div className="menu">
 
           <div className="back">
@@ -82,8 +82,8 @@ class App extends Component {
           </div>
           <div className="last">{this.ChatStore.currentMessageID}</div>
         </div>
-        <ol className="chat">
-
+<div className="chat">
+        <ol>
           {this.ChatStore.chat.messages.map(message => {
             return (
               <li
@@ -102,16 +102,16 @@ class App extends Component {
           })}
 
         </ol>
-
-        <textarea
+        </div>
+<div  className="textarea">
+<input
           value={this.state.questionArea}
-          className="textarea"
           type="text"
           placeholder="¿Cual es su pregunta?"
           onChange={this.questionArea}
           onKeyDown={this.addUserMessage}
-        />
-
+        />        
+</div>
       </div>
     );
   }
