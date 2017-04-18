@@ -7,7 +7,6 @@ import { observer } from 'mobx-react';
 class App extends Component {
   constructor() {
     super();
-    this.ChatStore = new ChatStore();
     this.state = {
       questionArea: '',
       audio: new Audio(
@@ -35,7 +34,7 @@ class App extends Component {
       if (questionAreaMessage.trim().length > 0) {
         //1%2=>1   le va al usuario
         this.setState({ questionArea: '' });
-        this.ChatStore.addUserMessage(questionAreaMessage);
+        this.props.ChatStore.addUserMessage(questionAreaMessage);
 
         //Estas lineas solo pretenden simular un Agente Contestando
         this.addAgentMessage();
@@ -46,6 +45,7 @@ class App extends Component {
     }
 
     //generar un nuevo mensaje y aumentar el id de this.state.currentMessageID unicamente, otro metodo (addAgentMessage) se encargara
+
     //de agregar el mensaje de el Agente
   }
 
@@ -54,7 +54,7 @@ class App extends Component {
     let simulacionRespuesta = Math.random() * 1024;
 
     if (simulacionRespuesta > 200 && 250 > simulacionRespuesta) {
-      this.ChatStore.addAgentMessage(simulacionRespuesta);
+      this.props.ChatStore.addAgentMessage(simulacionRespuesta);
     }
   }
 
@@ -63,55 +63,56 @@ class App extends Component {
   }
 
   render() {
+    const ChatStore = this.props.ChatStore;
     return (
       <div>
-        
+
         <div className="menu">
 
           <div className="back">
             <i className="fa fa-chevron-left" />
 
             <img
-              src={this.ChatStore.chat.agentAvatar}
+              src={ChatStore.chat.agentAvatar}
               draggable="false"
-              alt={this.ChatStore.chat.agentName}
+              alt={ChatStore.chat.agentName}
             />
           </div>
           <div className="name">
-            {this.ChatStore.chat.agentName}
+            {ChatStore.chat.agentName}
           </div>
-          <div className="last">{this.ChatStore.currentMessageID}</div>
+          <div className="last">{ChatStore.currentMessageID}</div>
         </div>
-<div className="chat">
-        <ol>
-          {this.ChatStore.chat.messages.map(message => {
-            return (
-              <li
-                autoFocus
-                key={message.id}
-                className={message.id % 2 === 1 ? 'user' : 'agent'}
-              >
-                <div className="msg">
-                  {message.lines.map((line, k) => {
-                    return <p key={k}>{line}</p>;
-                  })}
-                  <time>{message.time}</time>
-                </div>
-              </li>
-            );
-          })}
+        <div className="chat">
+          <ol>
+            {ChatStore.chat.messages.map(message => {
+              return (
+                <li
+                  autoFocus
+                  key={message.id}
+                  className={message.id % 2 === 1 ? 'user' : 'agent'}
+                >
+                  <div className="msg">
+                    {message.lines.map((line, k) => {
+                      return <p key={k}>{line}</p>;
+                    })}
+                    <time>{message.time}</time>
+                  </div>
+                </li>
+              );
+            })}
 
-        </ol>
+          </ol>
         </div>
-<div  className="textarea">
-<input
-          value={this.state.questionArea}
-          type="text"
-          placeholder="¿Cual es su pregunta?"
-          onChange={this.questionArea}
-          onKeyDown={this.addUserMessage}
-        />        
-</div>
+        <div className="textarea">
+          <input
+            value={this.state.questionArea}
+            type="text"
+            placeholder="¿Cual es su pregunta?"
+            onChange={this.questionArea}
+            onKeyDown={this.addUserMessage}
+          />
+        </div>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import { computed, extendObservable, action } from 'mobx';
 import v4 from 'uuid/v4';
 
-export default class {
+class _ChatStore {
   constructor() {
     const actors = {
       AGENT: 0,
@@ -67,3 +67,6 @@ export default class {
     });
   }
 }
+
+const ChatStore=new _ChatStore();
+export default ChatStore;
