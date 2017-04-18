@@ -1,5 +1,6 @@
 import { computed, extendObservable, action } from 'mobx';
 import v4 from 'uuid/v4';
+import remotedev from 'mobx-remotedev';
 
 class _ChatStore {
   constructor() {
@@ -69,4 +70,4 @@ class _ChatStore {
 }
 
 const ChatStore=new _ChatStore();
-export default ChatStore;
+export default remotedev(ChatStore,{ global: true });

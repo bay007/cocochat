@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "mobx-react-devtools": "^4.2.11",
+    "mobx-remotedev": "^0.2.6",
     "react-scripts": "0.9.5"
   },
   "scripts": {
