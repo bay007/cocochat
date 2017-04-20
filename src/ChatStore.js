@@ -72,6 +72,7 @@ class _ChatStore {
              this.addAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente mas tarde');
           }
         }).catch((reason)=>{
+          this.addAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente mas tarde');
           console.error(reason);
         });
       }),

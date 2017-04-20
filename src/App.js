@@ -35,26 +35,7 @@ class App extends Component {
         //1%2=>1   le va al usuario
         this.setState({ questionArea: '' });
         this.props.ChatStore.addUserMessage(questionAreaMessage);
-
-        //Estas lineas solo pretenden simular un Agente Contestando
-        /*this.addAgentMessage();
-        this.addAgentMessage();
-        this.addAgentMessage();
-        this.addAgentMessage();*/
       }
-    }
-
-    //generar un nuevo mensaje y aumentar el id de this.state.currentMessageID unicamente, otro metodo (addAgentMessage) se encargara
-
-    //de agregar el mensaje de el Agente
-  }
-
-  addAgentMessage() {
-    //solo es para una simulacion, par que el agente "responda" no necesariamente despues de que un usuario lo hace
-    let simulacionRespuesta = Math.random() * 1024;
-
-    if (simulacionRespuesta > 200 && 250 > simulacionRespuesta) {
-      this.props.ChatStore.addAgentMessage(simulacionRespuesta);
     }
   }
 
