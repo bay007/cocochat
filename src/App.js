@@ -37,10 +37,10 @@ class App extends Component {
         this.props.ChatStore.addUserMessage(questionAreaMessage);
 
         //Estas lineas solo pretenden simular un Agente Contestando
+        /*this.addAgentMessage();
         this.addAgentMessage();
         this.addAgentMessage();
-        this.addAgentMessage();
-        this.addAgentMessage();
+        this.addAgentMessage();*/
       }
     }
 

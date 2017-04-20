@@ -1,6 +1,7 @@
 import { computed, extendObservable, action } from 'mobx';
 import v4 from 'uuid/v4';
 import remotedev from 'mobx-remotedev';
+import API_AI from './API.AI';
 
 class _ChatStore {
   constructor() {
@@ -23,11 +24,11 @@ class _ChatStore {
               '¿Cómo le puedo ayudar?',
             ],
             time: new Date().toLocaleString(),
-          }
-        ]
+          },
+        ],
       },
 
-      addAgentMessage: action.bound(function(simulacionRespuesta) {
+      addAgentMessage: action.bound(function(line) {
         let message = {
           id: this.currentMessageID,
           lines: [],
@@ -35,16 +36,15 @@ class _ChatStore {
         };
 
         //si es el turno del usuario de escribir simplemente escribimos en el canal activo
-        let line = `Mensaje aleatorio de ${this.chat.agentName}: ${simulacionRespuesta}`;
+        
         if (this.currentMessageID % 2 === actors.AGENT) {
-          this.chat.messages[this.currentMessageID].lines.push(line);
         } else {
           //si ya no es su turno, generamos un nuevo canal y escribimos
           this.currentMessageID++;
           message.id = this.currentMessageID;
           this.chat.messages.push(message);
-          this.chat.messages[this.currentMessageID].lines.push(line);
         }
+        this.chat.messages[this.currentMessageID].lines.push(line);
       }),
 
       addUserMessage: action.bound(function(line) {
@@ -56,18 +56,28 @@ class _ChatStore {
 
         //si es el turno del usuario de escribir simplemente escribimos en el canal activo
         if (this.currentMessageID % 2 === actors.USER) {
-          this.chat.messages[this.currentMessageID].lines.push(line);
         } else {
           //si ya no es su turno, generamos un nuevo canal y escribimos
           this.currentMessageID++;
           message.id = this.currentMessageID;
           this.chat.messages.push(message);
-          this.chat.messages[this.currentMessageID].lines.push(line);
         }
+        this.chat.messages[this.currentMessageID].lines.push(line);
+        API_AI.send(line)
+        .then(response => {
+          if (response.data.status.code === 200) {
+              this.addAgentMessage(response.data.result.fulfillment.speech);
+          } else {
+            console.error(response.data.status.errorDetails);
+             this.addAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente mas tarde');
+          }
+        }).catch((reason)=>{
+          console.error(reason);
+        });
       }),
     });
   }
 }
 
-const ChatStore=new _ChatStore();
-export default remotedev(ChatStore,{ global: true });
+const ChatStore = new _ChatStore();
+export default remotedev(ChatStore, { global: true });

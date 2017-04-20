@@ -3,7 +3,7 @@
 
 .coconutt-chat-menu{
 display:flex;
-display-direction:row;
+flex-direction:row;
 background-color: rgba(82,179,217,0.9);
 }
 
@@ -58,10 +58,12 @@ margin-top:25px;
 }
 
 .coconutt-chat-msg{
-min-width:100px;
+min-width:155px;
 max-width:250px;
 background: white;
-
+padding-top: 10px;
+padding-right: 10px;
+padding-left: 10px;
 }
 
 .coconutt-chat-msg p {
