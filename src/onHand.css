@@ -1,5 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
-@import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+
+.coconutt-chat-standby img{
+height:72px;
+float:right;
+margin:10px;
+background-color: transparent;
+margin-right:15px;
+}
 
 .coconutt-chat-menu{
 display:flex;
@@ -16,35 +23,29 @@ border-radius:7px;
 -ms-border-radius: 100%;
 margin-left: 15px;
 background-color: rgba(255,255,255,0.98);
+cursor:pointer;
 }
 
 .coconutt-chat-back{
 background-color: rgba(255,255,255,0.2);
 }
+
 .coconutt-chat-name{
-    position: absolute;
-    left: 40%;
-    
-    font-family: 'Lato';
-    font-size: 25px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.98);
-    cursor: default;
+position: absolute;
+right: 10%;
+font-family: 'Lato';
+font-size: 25px;
+font-weight: 300;
+color: rgba(255,255,255,0.98);
+cursor: default;
 }
 
-.coconutt-chat-last{
-    font-family: 'Lato';
-    font-size: 11px;
-    font-weight: 400;
-    color: rgba(255,255,255,0.6);
-    cursor: default;
-}
 .coconutt-chat-chat{
 height:400px;
 overflow-y:auto;
 padding-left:15px;
 padding-right:15px;
-
+background-color: #F3EFE0; 
 }
 
 .coconutt-chat-chat ol li{
@@ -52,13 +53,12 @@ list-style:none;
 display:flex;
 overflow-wrap: break-word;
 flex-direction:column;
-margin-bottom:25px;
-margin-top:25px;
-
+margin-bottom:20px;
+margin-top:0px;
 }
 
 .coconutt-chat-msg{
-min-width:155px;
+min-width: 75%;
 max-width:250px;
 background: white;
 padding-top: 10px;
@@ -67,9 +67,9 @@ padding-left: 10px;
 }
 
 .coconutt-chat-msg p {
-    font-size: 1 rem;
-    margin: 0 0 0.25rem 0;
-    color: #777;
+font-size: 1 rem;
+margin: 0 0 0.25rem 0;
+color: #777;
 }
 
 .coconutt-chat-user{
@@ -78,8 +78,6 @@ margin:5px;
 position:relative;
 right:-5px;
 float:right;
-
-
 }
 
 .coconutt-chat-agent{
@@ -94,7 +92,7 @@ background: #EEECE1;
 }
 
 .coconutt-chat-textarea textarea{
-
+overflow: hidden;
 width:80%;
 float:left;
 resize:none;
@@ -117,52 +115,54 @@ float:rigth;
 }
 
 .coconutt-chat-msg time {
-    font-size: 0.7rem;
-    color: #ccc;
-    margin-top: 5px;
-    float: left;
-    cursor: default;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+font-size: 0.7rem;
+color: #ccc;
+margin-top: 5px;
+float: left;
+cursor: default;
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
 }
-.coconutt-chat-msg time:before{
-    content:"\f017";
-    color: #ddd;
-    font-family: FontAwesome;
-    display: inline-block;
-    margin-right: 4px;
-}
-.coconutt-chat-chat::-webkit-scrollbar {
-    min-width: 6px;
-    width: 12px;
-    max-width: 12px;
-    min-height: 12px;
-    height: 12px;
-    max-height: 12px;
-    background: #e5e5e5;
 
+.coconutt-chat-msg time:before{
+content:"\f017";
+color: #ddd;
+font-family: FontAwesome;
+display: inline-block;
+margin-right: 4px;
+}
+
+.coconutt-chat-chat::-webkit-scrollbar {
+min-width: 6px;
+width: 12px;
+max-width: 12px;
+min-height: 12px;
+height: 12px;
+max-height: 12px;
+background: #e5e5e5;
 }
 
 .coconutt-chat-chat::-webkit-scrollbar-thumb {
-    background: #bbb;
-    border: none;
-    border-radius: 100px;
-    border: solid 3px #e5e5e5;
-    box-shadow: inset 0px 0px 3px #999;
+background: #bbb;
+border: none;
+border-radius: 100px;
+border: solid 3px #e5e5e5;
+box-shadow: inset 0px 0px 3px #999;
 }
 
 .coconutt-chat-chat::-webkit-scrollbar-thumb:hover {
-  background: #b0b0b0;
-  box-shadow: inset 0px 0px 3px #888;
+background: #b0b0b0;
+box-shadow: inset 0px 0px 3px #888;
 }
 
 .coconutt-chat-chat::-webkit-scrollbar-thumb:active {
 background: #aaa;
-  box-shadow: inset 0px 0px 3px #7f7f7f;
+box-shadow: inset 0px 0px 3px #7f7f7f;
 }
 
 .coconutt-chat-chat::-webkit-scrollbar-button {
-    display: block;
-    height: 261px;}
+display: block;
+height: 261px;
+}
