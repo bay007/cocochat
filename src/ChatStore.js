@@ -1,7 +1,6 @@
 import { computed, extendObservable, action } from 'mobx';
 import v4 from 'uuid/v4';
 import remotedev from 'mobx-remotedev';
-import API_AI from './API.AI';
 import CoconuttAI from './CoconuttAI';
 
 class _ChatStore {
@@ -82,16 +81,16 @@ class _ChatStore {
 
 
         ///////////////////////Conexion con la API de PNL
-        API_AI.send(MessageUserline)
+        CoconuttAI.send(MessageUserline)
           .then(DelayPromise(2500))
           .then(response => {
             console.log(response);
-            if (response.data.status.code === 200) {
+            if (response.status === 200) {
 
-              this.showOnChatAgentMessage(response.data.result.fulfillment.speech);
+              this.showOnChatAgentMessage(response.data.msg);
               this.setQuestionAreaMessage('');
             } else {
-              console.error(response.data.status.errorDetails);
+              console.error(response);
               this.showOnChatAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente de nuevo...');
               this.isErrorExistsOnPNLProcessMessage = true;
             }
