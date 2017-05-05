@@ -122,15 +122,17 @@ class App extends Component {
               rows="2"
               placeholder="¿Cual es su pregunta?"
             />
-            <img
-              src="http://www.myiconfinder.com/uploads/iconsets/a3fa321a44e798b62853d2259ee99b80-Send.png"
-              onClick={this.addUserMessage.bind(this, 'sentByIcon')}
-            />
+            {
+              ChatStore.isPNLProcessingMessage ?
+                <img src="https://coworker-media.s3.amazonaws.com/template/img/log_loading.gif" />
+                :
+                <img src="http://www.myiconfinder.com/uploads/iconsets/a3fa321a44e798b62853d2259ee99b80-Send.png"
+                  onClick={this.addUserMessage.bind(this, 'sentByIcon')} />
+            }
           </div>
-        </div>
+        </div >
       );
   }
 }
 
 export default observer(App);
-

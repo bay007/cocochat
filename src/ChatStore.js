@@ -2,6 +2,7 @@ import { computed, extendObservable, action } from 'mobx';
 import v4 from 'uuid/v4';
 import remotedev from 'mobx-remotedev';
 import API_AI from './API.AI';
+import CoconuttAI from './CoconuttAI';
 
 class _ChatStore {
   constructor() {
@@ -11,6 +12,10 @@ class _ChatStore {
     };
     extendObservable(this, {
       currentMessageID: 0,
+      isPNLProcessingMessage: false,
+      isErrorExistsOnPNLProcessMessage: false,
+      //////////////////////////////
+
       chat: {
         id: v4(),
         agentName: 'Egalicia',
@@ -18,7 +23,7 @@ class _ChatStore {
         messages: [
           {
             id: 0,
-            lines: [
+            messageLines: [
               'Hola.',
               `Hoy seré quien pueda brindarle apoyo.`,
               '¿Cómo le puedo ayudar?'
@@ -28,14 +33,16 @@ class _ChatStore {
         ]
       },
 
-      addAgentMessage: action.bound(function (line) {
+
+      showOnChatAgentMessage: action.bound(function (line) {
+
         let message = {
           id: this.currentMessageID,
-          lines: [],
+          messageLines: [],
           time: new Date().toLocaleString()
         };
 
-        //si es el turno del usuario de escribir simplemente escribimos en el canal activo
+        //si NO es el turno del usuario de escribir simplemente escribimos en el canal activo
 
         if (this.currentMessageID % 2 !== actors.AGENT) {
 
@@ -44,40 +51,69 @@ class _ChatStore {
           message.id = this.currentMessageID;
           this.chat.messages.push(message);
         }
-        this.chat.messages[this.currentMessageID].lines.push(line);
+        this.chat.messages[this.currentMessageID].messageLines.push(line);
+
       }),
 
-      addUserMessage: action.bound(function (line) {
+      processUserMessage: action.bound(function (MessageUserline) {
+        this.isPNLProcessingMessage = true;
+        this.isErrorExistsOnPNLProcessMessage = false;
         let message = {
           id: this.currentMessageID,
-          lines: [],
+          messageLines: [],
           time: new Date().toLocaleString()
         };
 
-        //si es el turno del usuario de escribir simplemente escribimos en el canal activo
+        //si NO es el turno del usuario de escribir simplemente escribimos en el canal activo
         if (this.currentMessageID % 2 !== actors.USER) {
           //si ya no es su turno, generamos un nuevo canal y escribimos
           this.currentMessageID++;
           message.id = this.currentMessageID;
-          this.chat.messages.push(message);
+          this.chat.messages.push(message);//generamos el cascaron de un nuevo mensaje
         }
-        this.chat.messages[this.currentMessageID].lines.push(line);
-        API_AI.send(line)
+        this.chat.messages[this.currentMessageID].messageLines.push(MessageUserline); //rellenamos el cascaron del mensaje con lo que escribio el usuario
+
+
+        ///////////////////////Conexion con la API de PNL
+        API_AI.send(MessageUserline)
+          .then(DelayPromise(2500))
           .then(response => {
+            console.log(response);
             if (response.data.status.code === 200) {
-              this.addAgentMessage(response.data.result.fulfillment.speech);
+
+              this.showOnChatAgentMessage(response.data.result.fulfillment.speech);
             } else {
+
               console.error(response.data.status.errorDetails);
-              this.addAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente mas tarde');
+              this.showOnChatAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente mas tarde');
             }
+            this.isPNLProcessingMessage = false;
           })
-          .catch(value => {
-            this.addAgentMessage(value);
-          });
-      })
-    });
+          .catch((errorValue) => {
+            console.log(errorValue);
+            this.isPNLProcessingMessage = false;
+            this.isErrorExistsOnPNLProcessMessage = true;
+          })
+
+        /////////////////////////////////////////////////
+      }) //processUserMessage: action.bound(
+
+    });//extendObservable(...
   }
 }
 
 const ChatStore = new _ChatStore();
 export default remotedev(ChatStore, { global: true });
+
+function DelayPromise(delay) {
+  //return a function that accepts a single variable
+  return function (data) {
+    //this function returns a promise.
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        //a promise that is resolved after "delay" milliseconds with the data provided
+        resolve(data);
+      }, 1000 + (delay * Math.random()));
+    });
+  }
+}
