@@ -14,6 +14,7 @@ class _ChatStore {
       currentMessageID: 0,
       isPNLProcessingMessage: false,
       isErrorExistsOnPNLProcessMessage: false,
+      questionAreaMessage: '',
       //////////////////////////////
 
       chat: {
@@ -33,7 +34,13 @@ class _ChatStore {
         ]
       },
 
+      setQuestionAreaMessage: action.bound(function (questionAreaText) {
+        this.questionAreaMessage = questionAreaText;
+      }),
 
+      get getQuestionAreaMessage() {
+        return this.questionAreaMessage;
+      },
       showOnChatAgentMessage: action.bound(function (line) {
 
         let message = {
@@ -82,15 +89,17 @@ class _ChatStore {
             if (response.data.status.code === 200) {
 
               this.showOnChatAgentMessage(response.data.result.fulfillment.speech);
+              this.setQuestionAreaMessage('');
             } else {
-
               console.error(response.data.status.errorDetails);
-              this.showOnChatAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente mas tarde');
+              this.showOnChatAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente de nuevo...');
+              this.isErrorExistsOnPNLProcessMessage = true;
             }
             this.isPNLProcessingMessage = false;
           })
           .catch((errorValue) => {
             console.log(errorValue);
+            this.showOnChatAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente de nuevo...');
             this.isPNLProcessingMessage = false;
             this.isErrorExistsOnPNLProcessMessage = true;
           })
