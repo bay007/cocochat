@@ -25,20 +25,21 @@ class App extends Component {
 
   addUserMessage = (event) => {
     const questionAreaMessage = this.state.questionArea.trim();
-    if (event.keyCode === 13) {
+    /*if (event.keyCode === 13) {
       event.preventDefault();
       if (questionAreaMessage.trim().length > 0) {
         //1%2=>1   le va al usuario
         this.setState({ questionArea: '' });
         this.props.ChatStore.addUserMessage(questionAreaMessage);
       }
-    }
+    }*/
 
     if (event === 'sentByIcon') {
       if (questionAreaMessage.trim().length > 0) {
         //1%2=>1   le va al usuario
         this.setState({ questionArea: '' });
-        this.props.ChatStore.addUserMessage(questionAreaMessage);
+        this.props.ChatStore.processUserMessage(questionAreaMessage)
+
       }
     }
   }
@@ -83,34 +84,38 @@ class App extends Component {
           </div>
           <div className="coconutt-chat-chat">
             <ol>
-              {ChatStore.chat.messages.map(message => {
-                return (
-                  <li
-                    autoFocus
-                    key={message.id}
-                    className={
-                      message.id % 2 === 1
-                        ? 'coconutt-chat-user'
-                        : 'coconutt-chat-agent'
-                    }
-                  >
-                    <div className="coconutt-chat-msg">
-                      {message.lines.map((line, k) => {
-                        return <p key={k}>{line}</p>;
-                      })}
-                      <time>{message.time}</time>
-                    </div>
-                  </li>
-                );
-              })}
+              {
+                ChatStore.chat.messages.map(message => {
+                  return (
+                    <li
+                      autoFocus
+                      key={message.id}
+                      className={
+                        message.id % 2 === 1
+                          ? 'coconutt-chat-user'
+                          : 'coconutt-chat-agent'
+                      }
+                    >
+                      <div className="coconutt-chat-msg">
+
+                        <p>
+                          {message.messageLines.join(' ')}
+                        </p>
+
+                        <time>{message.time}</time>
+                      </div>
+                    </li>
+                  );
+                })
+              }
 
             </ol>
           </div>
           <div className="coconutt-chat-textarea">
             <textarea
               onChange={this.questionArea}
-              onKeyDown={this.addUserMessage}
               value={this.state.questionArea}
+              onKeyDown={this.addUserMessage}
               minLength="1"
               maxLength="240"
               wrap="on"
@@ -128,3 +133,4 @@ class App extends Component {
 }
 
 export default observer(App);
+
