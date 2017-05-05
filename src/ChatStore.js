@@ -1,7 +1,7 @@
 import { computed, extendObservable, action } from 'mobx';
 import v4 from 'uuid/v4';
 import remotedev from 'mobx-remotedev';
-import WC from './WC';
+import API_AI from './API.AI';
 
 class _ChatStore {
   constructor() {
@@ -28,7 +28,7 @@ class _ChatStore {
         ]
       },
 
-      addAgentMessage: action.bound(function(line) {
+      addAgentMessage: action.bound(function (line) {
         let message = {
           id: this.currentMessageID,
           lines: [],
@@ -37,8 +37,8 @@ class _ChatStore {
 
         //si es el turno del usuario de escribir simplemente escribimos en el canal activo
 
-        if (this.currentMessageID % 2 === actors.AGENT) {
-        } else {
+        if (this.currentMessageID % 2 !== actors.AGENT) {
+
           //si ya no es su turno, generamos un nuevo canal y escribimos
           this.currentMessageID++;
           message.id = this.currentMessageID;
@@ -47,7 +47,7 @@ class _ChatStore {
         this.chat.messages[this.currentMessageID].lines.push(line);
       }),
 
-      addUserMessage: action.bound(function(line) {
+      addUserMessage: action.bound(function (line) {
         let message = {
           id: this.currentMessageID,
           lines: [],
@@ -55,18 +55,21 @@ class _ChatStore {
         };
 
         //si es el turno del usuario de escribir simplemente escribimos en el canal activo
-        if (this.currentMessageID % 2 === actors.USER) {
-        } else {
+        if (this.currentMessageID % 2 !== actors.USER) {
           //si ya no es su turno, generamos un nuevo canal y escribimos
           this.currentMessageID++;
           message.id = this.currentMessageID;
           this.chat.messages.push(message);
         }
         this.chat.messages[this.currentMessageID].lines.push(line);
-        WC.send(line)
-          .then(value => {
-            let response = JSON.stringify(value, null, 2);
-            this.addAgentMessage(response);
+        API_AI.send(line)
+          .then(response => {
+            if (response.data.status.code === 200) {
+              this.addAgentMessage(response.data.result.fulfillment.speech);
+            } else {
+              console.error(response.data.status.errorDetails);
+              this.addAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente mas tarde');
+            }
           })
           .catch(value => {
             this.addAgentMessage(value);
