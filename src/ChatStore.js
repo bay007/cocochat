@@ -86,11 +86,18 @@ class _ChatStore {
         CoconuttAI.send(MessageUserline)
           .then(DelayPromise(2500))
           .then(response => {
-            console.log(response);
-            if (response.status === 200) {
 
-              this.showOnChatAgentMessage(response.data.msg);
-              this.setQuestionAreaMessage('');
+            if (response.status === 200) {
+              if (response.data.error === false) {
+                console.log(response);
+                this.showOnChatAgentMessage(response.data.msg);
+                this.setQuestionAreaMessage('');
+              } else {
+                console.error(response);
+                this.showOnChatAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente de nuevo...');
+                this.isErrorExistsOnPNLProcessMessage = true;
+              }
+
             } else {
               console.error(response);
               this.showOnChatAgentMessage('Por el momento tenemos problemas con nuestro agente, por favor intente de nuevo...');
