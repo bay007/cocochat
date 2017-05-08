@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+/*@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);*/
 
 .coconutt-chat-standby img{
 height:72px;
@@ -7,6 +7,7 @@ margin:10px;
 background-color: transparent;
 margin-right:15px;
 cursor:pointer;
+width: auto;
 }
 
 .coconutt-chat-menu{
@@ -17,6 +18,7 @@ background-color: rgba(82,179,217,0.9);
 
 .coconutt-chat-menu img{
 width:36px;
+height: auto;
 margin-right:10px;
 border-radius:7px;
 -webkit-border-radius: 100%;
@@ -56,6 +58,7 @@ overflow-wrap: break-word;
 flex-direction:column;
 margin-bottom:20px;
 margin-top:0px;
+min-width: 125px;
 }
 
 .coconutt-chat-msg{
@@ -109,6 +112,7 @@ border-radius:10px
 
 .coconutt-chat-textarea img{
 width:15%;
+height: auto;
 border:1px solid #23819E;
 border-radius:100px;
 cursor: pointer;
