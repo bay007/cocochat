@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './onHand.css';
 import ChatStore from './ChatStore';
-import DevTools from 'mobx-react-devtools';
 import { observer } from 'mobx-react';
+const helpIconStandBy = 'https://s3.amazonaws.com/coco-aws-chat/icons-images/help-icon-standBy.png';
+const loadingIconWaitingResponse = 'https://s3.amazonaws.com/coco-aws-chat/icons-images/loading-icon-waitingResponse.gif';
+const sendIconSendQuestion = 'https://s3.amazonaws.com/coco-aws-chat/icons-images/send-icon-SendQuestion.png';
 
 class App extends Component {
   state = {
@@ -45,7 +47,7 @@ class App extends Component {
       return (
         <div className="coconutt-chat-standby">
           <img
-            src="https://www.bomgar.com/assets/images/blog/app_full_proxy.png"
+            src={helpIconStandBy}
             onClick={() => {
               this.setState({ isWidgetStandBy: !this.state.isWidgetStandBy });
             }}
@@ -113,9 +115,9 @@ class App extends Component {
             />
             {
               ChatStore.isPNLProcessingMessage ?
-                <img src="https://coworker-media.s3.amazonaws.com/template/img/log_loading.gif" />
+                <img src={loadingIconWaitingResponse} />
                 :
-                <img src="http://www.myiconfinder.com/uploads/iconsets/a3fa321a44e798b62853d2259ee99b80-Send.png"
+                <img src={sendIconSendQuestion}
                   onClick={this.addUserMessage.bind(this, 'sentByIcon')} />
             }
           </div>

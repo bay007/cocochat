@@ -5,6 +5,8 @@ import CoconuttAI from './CoconuttAI';
 
 class _ChatStore {
   constructor() {
+    const agentIconResponse2User = 'https://s3.amazonaws.com/coco-aws-chat/icons-images/agent-icon-Response2User.png';
+    const agentName = "BCBNews Agent";
     const actors = {
       AGENT: 0,
       USER: 1
@@ -18,8 +20,8 @@ class _ChatStore {
 
       chat: {
         id: v4(),
-        agentName: 'Egalicia',
-        agentAvatar: 'http://i.imgur.com/DY6gND0.png',
+        agentName: agentName,
+        agentAvatar: agentIconResponse2User,
         messages: [
           {
             id: 0,
