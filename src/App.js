@@ -8,21 +8,21 @@ const sendIconSendQuestion = 'https://s3.amazonaws.com/coco-aws-chat/icons-image
 
 const CoconuttChatStandBy = styled.div`
 .coconutt-chat-standby img{
-  height:72px;
+  height:auto;
   float:right;
-  margin:10px;
+  margin:0px;
   background-color: transparent;
-  margin-right:15px;
+  padding: 0px;
   cursor:pointer;
-  width: auto;
+  width: 20%;
 }`;
 
 const CoconuttChat = styled.div`
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+
 .coconutt-chat-menu{
   display:flex;
   flex-direction:row;
-  background-color: rgba(82,179,217,0.9);
 }
 
 .coconutt-chat-menu img{
@@ -53,11 +53,10 @@ const CoconuttChat = styled.div`
 }
 
 .coconutt-chat-chat{
-  height:400px;
   overflow-y:auto;
   padding-left:15px;
   padding-right:15px;
-  background-color: #F3EFE0; 
+  
 }
 
 .coconutt-chat-chat ol li{
@@ -72,7 +71,7 @@ const CoconuttChat = styled.div`
 
 .coconutt-chat-msg{
   min-width: 75%;
-  max-width:250px;
+  max-width: 95%;
   background: white;
   padding-top: 10px;
   padding-right: 10px;
@@ -80,13 +79,13 @@ const CoconuttChat = styled.div`
 }
 
 .coconutt-chat-msg p {
-  font-size: 1 rem;
+  font-size: 110%;
   margin: 0 0 0.25rem 0;
   color: #777;
 }
 
 .coconutt-chat-user{
-  box-shadow: 6px 7px 3px #D8d4D4;
+  box-shadow:  3px 4px 0px 1px #D8d4D4;
   margin:5px;
   position:relative;
   right:-5px;
@@ -94,7 +93,7 @@ const CoconuttChat = styled.div`
 }
 
 .coconutt-chat-agent{
-  box-shadow: -6px 7px 3px #D8d4D4;
+  box-shadow:  -3px 4px 0px 1px #D8d4D4;
   position:relative;
   left:-35px;
   float:left;
@@ -117,18 +116,19 @@ const CoconuttChat = styled.div`
   width:80%;
   float:left;
   resize:none;
-  height:55px;
+  height: 3em;
   background: rgba(181, 181, 191, 0.57);
   border: none;
   outline: none;
-  padding: 1px;
+  padding: 5px;
   color: #666;
+  font-size: 135%;
   font-weight: 400;
-  border-radius:10px
+  borderRadius: 5px;
 }
 
 .coconutt-chat-msg time {
-  font-size: 0.7rem;
+  font-size: 70%;
   color: #ccc;
   margin-top: 5px;
   float: left;
@@ -179,12 +179,13 @@ const CoconuttChat = styled.div`
   display: block;
   height: 261px;
 }
+
 `;
 
 
 class App extends Component {
   state = {
-    isWidgetStandBy: true,
+    isWidgetStandBy: false,
     windowSize: { height: 100, width: 200 },
     colorHeader: "#52b3d9",
     colorBody: "#F3EFE0",
@@ -298,7 +299,7 @@ class App extends Component {
       return (
         <div style={this.chatWidth()}>
           <CoconuttChat>
-            <div className="coconutt-chat-menu">
+            <div className="coconutt-chat-menu" style={{ backgroundColor: this.state.colorHeader }}>
               <div className="coconutt-chat-back">
                 <img
                   src={ChatStore.chat.agentAvatar}
@@ -313,7 +314,7 @@ class App extends Component {
                 {ChatStore.chat.agentName}
               </div>
             </div>
-            <div className="coconutt-chat-chat">
+            <div className="coconutt-chat-chat" style={{ backgroundColor: this.state.colorBody, maxHeight: this.state.windowSize.height * 0.7, minHeight: this.state.windowSize.height * 0.45 }}>
               <ol>
                 {
                   ChatStore.chat.messages.map(message => {
