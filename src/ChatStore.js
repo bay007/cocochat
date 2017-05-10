@@ -84,7 +84,7 @@ class _ChatStore {
 
         ///////////////////////Conexion con la API de PNL
         CoconuttAI.send(MessageUserline)
-          .then(DelayPromise(2500))
+          .then(DelayPromise(1500))
           .then(response => {
 
             if (response.status === 200) {
