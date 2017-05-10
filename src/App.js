@@ -249,22 +249,26 @@ class App extends Component {
 
     }
 
+    const Message = ({ message }) => {
+      return (<li autoFocus key={message.id}>
+
+        <s.CoconuttChatMsg className="coconutt-chat-msg">
+          <s.CoconuttChatMsgP>
+            <p>
+              {message.messageLines.join(' ')}
+            </p>
+          </s.CoconuttChatMsgP>
+          <s.CoconuttChatMsgTime>
+            <time>{message.time}</time>
+          </s.CoconuttChatMsgTime>
+        </s.CoconuttChatMsg>
+      </li>)
+    }
+
     const UserMessage = ({ message }) => {
       return (
-        <s.CoconuttChatUser>
-          <li autoFocus key={message.id}>
-
-            <s.CoconuttChatMsg className="coconutt-chat-msg">
-              <s.CoconuttChatMsgP>
-                <p>
-                  {message.messageLines.join(' ')}
-                </p>
-              </s.CoconuttChatMsgP>
-              <s.CoconuttChatMsgTime>
-                <time>{message.time}</time>
-              </s.CoconuttChatMsgTime>
-            </s.CoconuttChatMsg>
-          </li>
+        <s.CoconuttChatUser >
+          <Message message={message} />
         </s.CoconuttChatUser>
       )
     }
@@ -272,19 +276,7 @@ class App extends Component {
     const AgentMessage = ({ message }) => {
       return (
         < s.CoconuttChatAgent >
-          <li autoFocus key={message.id}>
-
-            <s.CoconuttChatMsg className="coconutt-chat-msg">
-              <s.CoconuttChatMsgP>
-                <p>
-                  {message.messageLines.join(' ')}
-                </p>
-              </s.CoconuttChatMsgP>
-              <s.CoconuttChatMsgTime>
-                <time>{message.time}</time>
-              </s.CoconuttChatMsgTime>
-            </s.CoconuttChatMsg>
-          </li>
+          <Message message={message} />
         </s.CoconuttChatAgent >
       )
     }
