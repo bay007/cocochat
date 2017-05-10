@@ -53,9 +53,11 @@ const CoconuttChat = styled.div`
 }
 
 .coconutt-chat-chat{
-  overflow-y:auto;
-  padding-left:15px;
-  padding-right:15px;
+  overflow-y:scroll;
+  overflow-x:hidden;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 0px;
   
 }
 
@@ -66,16 +68,14 @@ const CoconuttChat = styled.div`
   flex-direction:column;
   margin-bottom:20px;
   margin-top:0px;
-  min-width: 125px;
+  max-width: 75%;
 }
 
 .coconutt-chat-msg{
   min-width: 75%;
-  max-width: 95%;
+  max-width: 85%;
   background: white;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
+  margin:10px;
 }
 
 .coconutt-chat-msg p {
@@ -84,19 +84,82 @@ const CoconuttChat = styled.div`
   color: #777;
 }
 
-.coconutt-chat-user{
-  box-shadow:  3px 4px 0px 1px #D8d4D4;
-  margin:5px;
-  position:relative;
-  right:-5px;
-  float:right;
+.coconutt-chat-agent{
+right: 5%;
+position: relative;
+padding: 0px;
+background: #FFFFFF;
+-webkit-border-radius: 17px;
+-moz-border-radius: 17px;
+border-radius: 17px;
+border: #817F7F solid 3px;
+}
+.coconutt-chat-agent:after {
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 25px 15px 0;
+border-color: transparent #FFFFFF;
+display: block;
+width: 0;
+z-index: 1;
+margin-top: -15px;
+left: -25px;
+top: 35%;
 }
 
-.coconutt-chat-agent{
-  box-shadow:  -3px 4px 0px 1px #D8d4D4;
-  position:relative;
-  left:-35px;
-  float:left;
+.coconutt-chat-agent:before {
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 17px 27px 17px 0;
+border-color: transparent #817F7F;
+display: block;
+width: 0;
+z-index: 0;
+margin-top: -17px;
+left: -30px;
+top: 35%;
+}
+
+
+.coconutt-chat-user{
+position: relative;
+padding: 0px;
+background: #FFFFFF;
+-webkit-border-radius: 17px;
+-moz-border-radius: 17px;
+border-radius: 17px;
+border: #817F7F solid 3px;
+left: 12%;
+}
+
+.coconutt-chat-user:after{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 0 15px 25px;
+border-color: transparent #FFFFFF;
+display: block;
+width: 0;
+z-index: 1;
+margin-top: -15px;
+right: -25px;
+top: 50%;
+}
+
+.coconutt-chat-user:before{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 17px 0 17px 27px;
+border-color: transparent #817F7F;
+display: block;
+width: 0;
+z-index: 0;
+margin-top: -17px;
+right: -30px;
+top: 50%;
 }
 
 .coconutt-chat-textarea{
