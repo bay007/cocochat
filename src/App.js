@@ -91,19 +91,19 @@ class App extends Component {
     }
 
     if (width >= 721 && width < 1280) {
-      return { maxWidth: width * 0.45 };
+      return { maxWidth: width * 0.42 };
     }
 
     if (width >= 1281 && width < 1440) {
-      return { maxWidth: width * 0.5 };
+      return { maxWidth: width * 0.27 };
     }
 
     if (width >= 1440 && width < 1920) {
-      return { maxWidth: width * 0.3 };
+      return { maxWidth: width * 0.22 };
     }
 
     if (width < 1920) {
-      return { maxWidth: width * 0.25 };
+      return { maxWidth: width * 0.21 };
     }
   }
 
@@ -119,11 +119,10 @@ class App extends Component {
             background-color: transparent;
             padding: 0px;
             cursor:pointer;
-               width: 25%;
+               width: 15%;
         }`,
 
-      CoconuttChatMenu: styled.div`
-        {
+      CoconuttChatMenu: styled.div`{
         display:flex;
         flex-direction:row;
         background-color: ${this.state.colorHeader};
@@ -131,7 +130,7 @@ class App extends Component {
 
       CoconuttChatMenuImg: styled.div` 
     img{
-        width:19%;
+        width:15%;
         height: auto;
         margin-right:10px;
         border-radius:7px;
@@ -145,7 +144,7 @@ class App extends Component {
 
       CoconuttChatName: styled.div`{
         position: absolute;
-            right: 10%;
+        right: 10%;
         font-family: 'Lato';
         font-size: 150%;
         font-weight: 300;
@@ -158,9 +157,8 @@ class App extends Component {
             padding-left:15px;
             padding-right:15px;
             background-color: ${this.state.colorBody};
-            max-height:${this.state.windowSize.height * 0.67}px
+            max-height:${this.state.windowSize.height * 0.60}px
             min-height:${this.state.windowSize.height * 0.45}px
-          
         }`,
 
       CoconuttChatChatOlLi: styled.div`{
@@ -183,7 +181,7 @@ class App extends Component {
     }`,
 
       CoconuttChatMsgTime: styled.div`{
-        font-size: 1em;
+        font-size: 70%;
         color: #ccc;
         margin-top: 5px;
         float: left;
@@ -199,7 +197,7 @@ class App extends Component {
     }`,
       CoconuttChatMsgP: styled.div`{
         p {
-              font-size: 140%;
+          font-size: 110%;
           margin: 0 0 0.25rem 0;
           color: #777;
         }
@@ -211,13 +209,13 @@ class App extends Component {
         width: "80%",
         float: "left",
         resize: "none",
-        height: "4em",
+        height: "2em",
         background: "rgba(181, 181, 191, 0.57)",
         border: "none",
         outline: "none",
-        padding: "1px",
+        padding: "5px",
         color: "#666",
-        fontSize: "150%",
+        fontSize: "135%",
         borderRadius: "5px"
 
       },
@@ -233,7 +231,7 @@ class App extends Component {
     }`,
 
       CoconuttChatUser: styled.div`{
-        box-shadow: 6px 7px 3px #D8d4D4;
+        box-shadow:  3px 4px 0px 1px #D8d4D4;
         margin:5px;
         position:relative;
         right:-5px;
@@ -242,7 +240,7 @@ class App extends Component {
     }`,
 
       CoconuttChatAgent: styled.div`{
-        box-shadow: -6px 7px 3px #D8d4D4;
+        box-shadow:  -3px 4px 0px 1px #D8d4D4;
         position:relative;
         left:-35px;
         float:left;
