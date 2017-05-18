@@ -248,7 +248,7 @@ top: 50%;
 
 class App extends Component {
   state = {
-    isWidgetStandBy: false,
+    isWidgetStandBy: true,
     windowSize: { height: 100, width: 200 },
     colorHeader: "#52b3d9",
     colorBody: "#F3EFE0",
