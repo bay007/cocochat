@@ -268,6 +268,14 @@ class App extends Component {
   };
 
   addUserMessage = event => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      if (ChatStore.questionAreaMessage.trim().length > 0) {
+        //1%2=>1   le va al usuario
+        ChatStore.processUserMessage(ChatStore.questionAreaMessage.trim());
+      }
+    }
+
     if (event === 'sentByIcon') {
       if (ChatStore.getQuestionAreaMessage.length > 0) {
         //1%2=>1   le va al usuario
