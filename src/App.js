@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import ChatStore from './ChatStore';
 import { observer } from 'mobx-react';
-const helpIconStandBy =
-  'https://s3.amazonaws.com/coco-aws-chat/icons-images/help-icon-standBy.png';
-const loadingIconWaitingResponse =
-  'https://s3.amazonaws.com/coco-aws-chat/icons-images/loading-icon-waitingResponse.gif';
-const sendIconSendQuestion =
-  'https://s3.amazonaws.com/coco-aws-chat/icons-images/send-icon-SendQuestion.png';
+import AssetsConfig from './AssetsConfig';
+const helpIconStandBy = `${AssetsConfig.baseAssetsURL}/help-icon-standBy.png`;
+const loadingIconWaitingResponse = `${AssetsConfig.baseAssetsURL}/loading-icon-waitingResponse.gif`;
+const sendIconSendQuestion = `${AssetsConfig.baseAssetsURL}/send-icon-SendQuestion.png`;
 
 const CoconuttChatStandBy = styled.div`
 .coconutt-chat-standby img{

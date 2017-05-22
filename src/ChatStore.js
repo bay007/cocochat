@@ -2,11 +2,12 @@ import { computed, extendObservable, action, toJS } from 'mobx';
 import v4 from 'uuid/v4';
 import remotedev from 'mobx-remotedev';
 import CoconuttAI from './CoconuttAI';
+import AssetsConfig from './AssetsConfig';
 
 class _ChatStore {
   constructor() {
-    const agentIconResponse2User =
-      'https://s3.amazonaws.com/coco-aws-chat/icons-images/agent-icon-Response2User.png';
+    const agentIconResponse2User = `${AssetsConfig.baseAssetsURL}/agent-icon-Response2User.png`;
+
     const agentName = 'BCBNews Agent';
     const actors = {
       AGENT: 0,
